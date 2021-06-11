@@ -1,0 +1,167 @@
+React - library will do the heavy lifting of rendering your code on to the screen
+
+Using lots of components to build an app and work together to build an app.
+---------------
+Building SPA 
+---------------
+use the interfaces - when using react we can build single page applications - control parts of HTML pages or entire pages - can control the entire frontend
+We don't request a new HTML file from the server, react will change what's visibile on the screen e.g Netflix that's why it's so silky smooth
+
+React Alternatives - React.js is currently the most popular, other frameworks are: 
+
+Academind has courses on these too!
+Angular(focuses on components and inbuilt features and uses TypeScript)
+Vue(less popular -  mixture of React and Angular - uses components and includes core features but not as many as Angular) - all three are great to use!
+---------------
+Creating A React Project
+---------------
+In standard JS project - HTML, CSS, JS - HTML imports the files and does all the work
+
+React - abit more complex and involves more files - build step, the code we write isn't included in what you see.
+Development server - updates the page whenever the code is updated - the setup we need.
+
+For react to work - Node.js needs to be installed for JS to work outside the browser. Node is about broswer side JS.
+Node is needed to create a React App. It will use Node to transform and run the code.
+
+
+Names of components should be capitalised - cutomized components with a capital character
+
+Props
+----------------
+Props will be an argument that a component can accept - props will be an object that has a property e.g. title with different properties
+
+e.g. props.text
+
+app.js
+
+<todo text="hello" />
+
+
+todo.js
+<h2>{props.text}</h2> will render hello
+
+as props is an object we can tap into the properties we define as long as we use props as an argument in our component's functions
+
+
+event listener e.g.
+
+<button onClick={myFunction}>Submit</button>
+
+good pratice to build components to spilt up as many sections as possible - small and maintenable
+
+State
+------------
+React has a built in feature for states
+
+import { useState } from 'react'; - so we can use the function and render different outputs
+
+useState() must be called directly in component functions. 
+
+useState returns 2 elements in an array
+
+e.g.
+
+const [ element1, element2 ] = useState(false);
+element1 - current state snapshot
+element2 - function that allows us to change the value
+this matter because when we call state React will 
+reevaluate what's going and render something new depending on the 
+state
+
+
+Routing
+---------------
+changes what's visible on the screen based on URL changes
+install a 3rd part with the command prompt: npm install react-router-dom 
+
+allows us to add routing capabilities to the app
+
+import { BrowserRouter } from 'react-router-dom'; - in index.js a react component so we can use this as a HTML tag
+
+<BrowserRouter> <App> </BrowserRouter> , document.getElementById('root')
+
+
+in app.js import { Route } from 'react-router-dom'; - a component, it's job is to define different paths in the url and which components should be used for these paths
+
+
+function App() {
+  return (
+    <div>
+    	<Route path='part after the domain'><component to be loaded/></Route>
+	<Route path='part after the domain'><component to be loaded/></Route>
+	<Route path='part after the domain'><component to be loaded/></Route>
+    </div>
+  );
+}
+
+install the Switch component to wrap our route components
+import { Route, Switch } from 'react-router-dom';
+	<div>
+		<Switch>
+    			<Route path='/' exact={true}><component to be loaded/></Route>
+			<Route path='/path1'><component to be loaded/></Route>
+			<Route path='/path2'><component to be loaded/></Route>
+		</Switch>
+	</div>
+
+switch looks for the exact match and will stop the app looking for the others
+exact = true will make the app look for an exact match with the path, as the other 2 paths contain a / prevents multiple components/pages being rendered
+
+for this to work properly we'd need a nav bar to navigate to other pages
+
+we don't want to use <a href=""> tags as this sends a request to the server to change pages - we're already in our React app
+instead - import { Link } from 'react-router-dom'; in nav component
+
+function MainNavigation() {
+    return (
+        <header>
+            <div>
+                <nav>
+                    <ul>
+                        <li>
+				<Link to='/home'>Home</Link>
+			</li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+    )
+}
+
+
+Styling with CSS
+------------------
+
+import classes from './Component.module.css'; - this is how we name our css style sheets
+
+we can then tell different section of our JSX code which styles to use
+
+e.g
+
+<div className={classes.header}></div> 
+
+this will return/render the CSS code that uses .header to style
+
+allows us to create component specific styles scoped for the components
+
+
+Objects to JSX
+
+we can use {} as we need to use JS code so it's a dynamic function.
+
+{[<li>hello</li>, <li>world</li]} - this works so we can apply this below
+
+const dataObj =[{id: 1, title:'hello'},{id:2, title:'world'}];
+
+<ul>
+	{[dataObj.map((data) => 
+		return {<li key={data.id}>{data.title}</li>
+	}
+</ul>
+
+each list needs a key value
+
+props.children a speical prop that every prop has this,
+
+
+references - ref DOM elements
